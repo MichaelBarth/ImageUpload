@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>HTML</title>
+		<meta name="description" content="">
+		<meta name="author" content="Michael Barth">
+
+		
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<script src="js/jquery/jquery-1.11.2.min.js"></script>
+		<script src="js/jcrop/js/jquery.Jcrop.min.js"></script>
+		<link rel="stylesheet"  type="text/css" href="js/jcrop/css/jquery.Jcrop.css" />
+		<script src="js/myImageUpload.js"></script>
+		
+		<script type="text/javascript">
+		
+
+		$(document).ready(function(){
+			
+
+			
+			var  myImageUpload= function(){
+				
+				var _this=this;
+				
+				fileDialog({
+					'type':'file',
+					'multiple':false,
+					'accept':'image/*'},
+					function(files){
+						readImageFile(files[0],function(image){
+							if (image!=""){
+							showWorkbench(image,function(coord){
+								if(coord!=""){
+								cutImage (image,coord,function(image){
+									if(image!=""){
+									shrinkImage(image,924,function(image){
+										if (image!=""){
+											saveImage(image,function(result){
+												$("#croppedImage").attr("src",result);
+										});}
+									});} 			
+								});}
+							});}
+						});
+					});
+				
+				
+			}
+			
+			
+			$("#imageLoad").on("click",myImageUpload);
+			
+			});
+		</script>
+			
+		<link rel="stylesheet" href="js/jcrop/css/jquery.Jcrop.css" type="text/css" />
+
+
+		<div>
+			<header>
+				<h1>My Image-Upload</h1>
+				<button id="imageLoad">Load Image</button><br/>
+				<image id="croppedImage"></image>
+			</header>
+			
+
+			<div>
+			</div>
+		</div>
+		
+			</body>
+</html>
