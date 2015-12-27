@@ -1,3 +1,4 @@
+//
 var showWorkbench = function (image,callback){
 		console.log("Workbench");
 				var cropImg=$("#myImageUploadCropImg")[0];
